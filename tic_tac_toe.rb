@@ -33,9 +33,9 @@ end
 
 def draw_board(b)
   puts " #{b[1]} | #{b[2]} | #{b[3]} "
-  puts '-+-+-'
+  puts '-----------'
   puts " #{b[4]} | #{b[5]} | #{b[6]} "
-  puts '-+-+-'
+  puts '-----------'
   puts " #{b[7]} | #{b[8]} | #{b[9]} "
 end
 
