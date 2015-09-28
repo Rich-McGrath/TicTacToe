@@ -8,8 +8,8 @@
 # Psuedo Code
 # draw a board
 #
-# assing player1 to "X"
-# assign player2 to "O"
+# assing player to "X"
+# assign computer to "O"
 #
 # loop until a winner or all squares are taken
 #   player1 picks an empty square
@@ -21,3 +21,22 @@
 #   show the winner
 # or else
 #   it's a tie
+
+def draw_board
+  puts ' | | '
+  puts '-+-+-'
+  puts ' | | '
+  puts '-+-+-'
+  puts ' | | '
+end
+
+def player_picks_square
+  puts 'Pick a square:'
+  position = gets.chomp
+end
+
+draw_board
+  player_picks_square
+begin
+
+end until winner || all_squares_taken?
