@@ -5,6 +5,8 @@
 # 4. Run code to verify logic
 #
 
+require pry
+
 # Psuedo Code
 # draw a board
 #
@@ -31,12 +33,14 @@ def draw_board
 end
 
 def player_picks_square
-  puts 'Pick a square:'
+  puts 'Pick a square:(1-9)'
   position = gets.chomp
+  binding.pry
 end
 
 draw_board
-  player_picks_square
+player_picks_square
+
 begin
 
 end until winner || all_squares_taken?
