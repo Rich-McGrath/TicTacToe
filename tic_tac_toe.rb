@@ -5,7 +5,7 @@
 # 4. Run code to verify logic
 #
 
-require pry
+require 'pry'
 
 # Psuedo Code
 # draw a board
@@ -24,23 +24,31 @@ require pry
 # or else
 #   it's a tie
 
-def draw_board
-  puts ' | | '
+def initialize_board
+  b = {}
+  (1..9).each {|position| b[position] = ' '}
+  b
+end
+
+
+def draw_board(b)
+  puts " #{b[1]} | #{b[2]} | #{b[3]} "
   puts '-+-+-'
-  puts ' | | '
+  puts " #{b[4]} | #{b[5]} | #{b[6]} "
   puts '-+-+-'
-  puts ' | | '
+  puts " #{b[7]} | #{b[8]} | #{b[9]} "
 end
 
 def player_picks_square
-  puts 'Pick a square:(1-9)'
+  puts 'Pick a square:(1-9):'
   position = gets.chomp
   binding.pry
 end
 
-draw_board
-player_picks_square
+board = initialize_board
 
+draw_board(board)
+  player_picks_square
 begin
 
 end until winner || all_squares_taken?
