@@ -26,7 +26,7 @@ require 'pry'
 
 def initialize_board
   b = {}
-  (1..9).each {|position| b[position] = ' '}
+  (1..9).each {|position| b[position] = ' ' }
   b
 end
 
@@ -39,16 +39,18 @@ def draw_board(b)
   puts " #{b[7]} | #{b[8]} | #{b[9]} "
 end
 
-def player_picks_square
+def player_picks_square(b)
   puts 'Pick a square:(1-9):'
-  position = gets.chomp
+  position = gets.chomp.to_i
+  b[position] = 'X'
   binding.pry
 end
+
 
 board = initialize_board
 
 draw_board(board)
-  player_picks_square
+  player_picks_square(board)
 begin
 
 end until winner || all_squares_taken?
