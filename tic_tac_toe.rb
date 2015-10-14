@@ -25,50 +25,38 @@ require 'pry'
 #   it's a tie
 
 def initialize_board
-  b = {}
-  (1..9).each {|position| b[position] = ' ' }
-  b
+  board = {}
+  (1..9).each {|position| board[position] = ' ' }
+  board
 end
 
 
-def draw_board(b)
+def draw_board(board)
   system 'clear'
-  puts " #{b[1]} | #{b[2]} | #{b[3]} "
+  puts " #{board[1]} | #{board[2]} | #{board[3]} "
   puts '-----------'
-  puts " #{b[4]} | #{b[5]} | #{b[6]} "
+  puts " #{board[4]} | #{board[5]} | #{board[6]} "
   puts '-----------'
-  puts " #{b[7]} | #{b[8]} | #{b[9]} "
+  puts " #{board[7]} | #{board[8]} | #{board[9]} "
 end
 
-def empty_positions(b)
-  b.select {|k, v| v == ' ' }.keys
+def empty_positions(board)
+  board.keys.select {|position| board[position] == ' '}
 end
 
-def player_picks_square(b)
+def player_picks_square(board)
   puts 'Pick a square:(1-9):'
   position = gets.chomp.to_i
-  b[position] = 'X'
+  board[position] = 'X'
 end
 
-#def two_in_a_row(check_winner, board)
-#    if board.values_at()
-#end
-
-def computer_picks_square(b)
-  position = empty_positions(b).sample
-  b[position] = 'O'
+def computer_picks_square(board)
+  position = empty_positions(board).sample
+  board[position] = 'O'
 end
-
-#def winning_combinations
-#  winning_lines = {}
-winning_lines = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
-#  winning_lines
-#end
 
 def check_winner(board, winning_lines)
-  #winning_lines = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
   winning_lines.each do |line|
-  #win.each do |line|
     return 'Player' if board.values_at(*line).count('X') == 3
     return 'Computer' if board.values_at(*line).count('0') == 3
   end
@@ -83,13 +71,14 @@ def nine_positions_are_filled?(board)
   empty_positions(board) == []
 end
 
-  #win = winning_combinations
+
+  winning_lines = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
   board = initialize_board
   draw_board(board)
 
 begin
   player_picks_square(board)
-  computer_picks_square(board)
+  computer_picks_square(board,)
   draw_board(board)
   winner = check_winner(board, winning_lines)
 end until winner || nine_positions_are_filled?(board)
