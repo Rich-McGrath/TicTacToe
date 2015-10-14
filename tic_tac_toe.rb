@@ -26,10 +26,9 @@ require 'pry'
 
 def initialize_board
   board = {}
-  (1..9).each {|position| board[position] = ' ' }
+  (1..9).each { |position| board[position] = ' ' }
   board
 end
-
 
 def draw_board(board)
   system 'clear'
@@ -41,7 +40,7 @@ def draw_board(board)
 end
 
 def empty_positions(board)
-  board.keys.select {|position| board[position] == ' '}
+  board.keys.select { |position| board[position] == ' ' }
 end
 
 def player_picks_square(board)
@@ -71,14 +70,13 @@ def nine_positions_are_filled?(board)
   empty_positions(board) == []
 end
 
-
-  winning_lines = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
-  board = initialize_board
-  draw_board(board)
+winning_lines = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+board = initialize_board
+draw_board(board)
 
 begin
   player_picks_square(board)
-  computer_picks_square(board,)
+  computer_picks_square(board)
   draw_board(board)
   winner = check_winner(board, winning_lines)
 end until winner || nine_positions_are_filled?(board)
