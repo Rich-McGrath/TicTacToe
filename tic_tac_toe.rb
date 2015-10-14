@@ -78,3 +78,9 @@ begin
   draw_board(board)
   winner = check_winner
 end until winner || empty_position(board).empty?
+
+if winner
+  "#{winner} won!"
+else
+  puts "It's a tie!"
+end
