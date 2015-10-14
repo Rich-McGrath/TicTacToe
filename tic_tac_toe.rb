@@ -55,10 +55,13 @@ def computer_picks_square(b)
   b[position] = 'O'
 end
 
-board = initialize_board
+  board = initialize_board
+  draw_board(board)
 
-draw_board(board)
-  player_picks_square(board)
+
 begin
-
+  player_picks_square(board)
+  draw_board(board)
+  computer_picks_square(board)
+  draw_board(board)
 end until winner || all_squares_taken?
