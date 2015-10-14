@@ -32,6 +32,7 @@ end
 
 
 def draw_board(b)
+  system 'clear'
   puts " #{b[1]} | #{b[2]} | #{b[3]} "
   puts '-----------'
   puts " #{b[4]} | #{b[5]} | #{b[6]} "
@@ -39,7 +40,7 @@ def draw_board(b)
   puts " #{b[7]} | #{b[8]} | #{b[9]} "
 end
 
-def empty_positon(b)
+def empty_position(b)
   b.select {|k, v| v == ' ' }.keys
 end
 
@@ -47,21 +48,33 @@ def player_picks_square(b)
   puts 'Pick a square:(1-9):'
   position = gets.chomp.to_i
   b[position] = 'X'
-  binding.pry
+  #binding.pry
 end
 
 def computer_picks_square(b)
-  position = empty_positon(b).sample
+  position = empty_position(b).sample
   b[position] = 'O'
+end
+
+def check_winner(b)
+  winning_lines = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
+  winning_lines.each do |line|
+    if b[line[0]] == 'X' and b[line[1]] == 'X' and b[line[2]] == 'X'
+      return 'Player'
+    elsif b[line[0]] == 'O' and b[line[1]] == 'O' and b[line[2]] == 'O'
+      return 'Computer'
+    else
+      return nil
+    end
+  end
 end
 
   board = initialize_board
   draw_board(board)
 
-
 begin
   player_picks_square(board)
-  draw_board(board)
   computer_picks_square(board)
   draw_board(board)
-end until winner || all_squares_taken?
+  winner = check_winner
+end until winner || empty_position(board).empty?
