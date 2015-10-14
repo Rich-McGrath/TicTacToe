@@ -39,7 +39,7 @@ def draw_board(b)
   puts " #{b[7]} | #{b[8]} | #{b[9]} "
 end
 
-def empty_square(b)
+def empty_positon(b)
   b.select {|k, v| v == ' ' }.keys
 end
 
@@ -51,7 +51,8 @@ def player_picks_square(b)
 end
 
 def computer_picks_square(b)
-  b[ran(9)]
+  position = empty_positon(b).sample
+  b[position] = 'O'
 end
 
 board = initialize_board
