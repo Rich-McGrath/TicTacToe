@@ -50,14 +50,23 @@ def player_picks_square(board)
 end
 
 def computer_picks_square(board)
-    position = empty_positions(board).sample
-    board[position] = 'O'
+  defend_this_square = nil
 
-
+  WINNING_LINES.each do |l|
+    defend_this_square = two_in_a_row({l[0] => board[l[0]], l[1] => board[l[1]], l[2] => board[l[2]]}, X)
+    if defend_this_square
+      position = board[defend_this_square]
+      break
+  end
 end
 
-def check_winner(board, winning_lines)
-  winning_lines.each do |line|
+
+position = empty_positions(board).sample unless defend_this_square
+board[position] = 'O'
+end
+
+def check_winner(board)
+  WINNING_LINES.each do |line|
     return 'Player' if board.values_at(*line).count('X') == 3
     return 'Computer' if board.values_at(*line).count('0') == 3
   end
@@ -82,7 +91,7 @@ def nine_positions_are_filled?(board)
   empty_positions(board) == []
 end
 
-winning_lines = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 board = initialize_board
 draw_board(board)
 
@@ -90,8 +99,8 @@ begin
   player_picks_square(board)
   computer_picks_square(board)
   draw_board(board)
-  winner = check_winner(board, winning_lines)
-end until winner || nine_positions_are_filled?(board)
+  winner = check_winner(board)
+end until winner || nine_positions_are_filld?(board)
 
 if winner
   announce_winner(winner)
