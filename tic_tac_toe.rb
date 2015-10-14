@@ -39,6 +39,10 @@ def draw_board(b)
   puts " #{b[7]} | #{b[8]} | #{b[9]} "
 end
 
+def empty_square(b)
+  b.select {|k, v| v == ' ' }
+end
+
 def player_picks_square(b)
   puts 'Pick a square:(1-9):'
   position = gets.chomp.to_i
@@ -46,6 +50,9 @@ def player_picks_square(b)
   binding.pry
 end
 
+def computer_picks_square(b)
+  b[ran(9)]
+end
 
 board = initialize_board
 
