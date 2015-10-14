@@ -40,7 +40,7 @@ def draw_board(b)
 end
 
 def empty_square(b)
-  b.select {|k, v| v == ' ' }
+  b.select {|k, v| v == ' ' }.keys
 end
 
 def player_picks_square(b)
