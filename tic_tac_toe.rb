@@ -40,7 +40,7 @@ def draw_board(b)
   puts " #{b[7]} | #{b[8]} | #{b[9]} "
 end
 
-def empty_position(b)
+def empty_positions(b)
   b.select {|k, v| v == ' ' }.keys
 end
 
@@ -48,25 +48,24 @@ def player_picks_square(b)
   puts 'Pick a square:(1-9):'
   position = gets.chomp.to_i
   b[position] = 'X'
-  #binding.pry
 end
 
 def computer_picks_square(b)
-  position = empty_position(b).sample
+  position = empty_positions(b).sample
   b[position] = 'O'
 end
 
-def check_winner(b)
+def check_winner(board)
   winning_lines = [[1,2,3], [4,5,6], [7,8,9], [1,4,7], [2,5,8], [3,6,9], [1,5,9], [3,5,7]]
   winning_lines.each do |line|
-    if b[line[0]] == 'X' and b[line[1]] == 'X' and b[line[2]] == 'X'
-      return 'Player'
-    elsif b[line[0]] == 'O' and b[line[1]] == 'O' and b[line[2]] == 'O'
-      return 'Computer'
-    else
-      return nil
-    end
+    return 'Player' if board.values_at(*line).count('X') == 3
+    return 'Computer' if board.values_at(*line).count('0') == 3
   end
+  nil
+end
+
+def announce_winner(winner)
+  puts "#{winner} won!"
 end
 
   board = initialize_board
@@ -76,11 +75,11 @@ begin
   player_picks_square(board)
   computer_picks_square(board)
   draw_board(board)
-  winner = check_winner
-end until winner || empty_position(board).empty?
+  winner = check_winner(board)
+end until winner || empty_positions(board).empty?
 
 if winner
-  "#{winner} won!"
+  announce_winner(winner)
 else
   puts "It's a tie!"
 end
