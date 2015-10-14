@@ -50,8 +50,10 @@ def player_picks_square(board)
 end
 
 def computer_picks_square(board)
-  position = empty_positions(board).sample
-  board[position] = 'O'
+    position = empty_positions(board).sample
+    board[position] = 'O'
+
+
 end
 
 def check_winner(board, winning_lines)
@@ -60,6 +62,16 @@ def check_winner(board, winning_lines)
     return 'Computer' if board.values_at(*line).count('0') == 3
   end
   nil
+end
+
+mrkr = 'X'
+
+def two_in_a_row(board, mrkr)
+  if board.values.count(mrkr) == 2
+    board[position] = board.select { |_k, v| v == ' ' }.keys.first
+  else
+    false
+  end
 end
 
 def announce_winner(winner)
