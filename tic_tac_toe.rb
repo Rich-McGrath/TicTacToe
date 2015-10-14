@@ -53,7 +53,7 @@ def computer_picks_square(board)
   defend_this_square = nil
 
   WINNING_LINES.each do |l|
-    defend_this_square = two_in_a_row({l[0] => board[l[0]], l[1] => board[l[1]], l[2] => board[l[2]]}, X)
+    defend_this_square = two_in_a_row({l[0] => board[l[0]], l[1] => board[l[1]], l[2] => board[l[2]]} )
     if defend_this_square
       position = board[defend_this_square]
       break
@@ -73,11 +73,11 @@ def check_winner(board)
   nil
 end
 
-mrkr = 'X'
+MRKR = 'X'
 
-def two_in_a_row(board, mrkr)
-  if board.values.count(mrkr) == 2
-    board[position] = board.select { |_k, v| v == ' ' }.keys.first
+def two_in_a_row(board)
+  if board.values.count(MRKR) == 2
+    empty_positions(board)
   else
     false
   end
@@ -97,10 +97,11 @@ draw_board(board)
 
 begin
   player_picks_square(board)
+  two_in_a_row(board)
   computer_picks_square(board)
   draw_board(board)
   winner = check_winner(board)
-end until winner || nine_positions_are_filld?(board)
+end until winner || nine_positions_are_filled?(board)
 
 if winner
   announce_winner(winner)
