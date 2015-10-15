@@ -79,10 +79,9 @@ end
 MRKR = 'X'
 
 def two_in_a_row(board)
-  return false unless board.values.count(MRK) == 2
+  return false unless board.values.count('X') == 2
   empty_positions(board).first
 end
-
 
 def announce_winner(winner)
   puts "#{winner} won!"
@@ -93,12 +92,14 @@ def nine_positions_are_filled?(board)
 end
 
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+
 board = initialize_board
 draw_board(board)
-
 begin
   player_picks_square(board)
   two_in_a_row(board)
+  draw_board(board)
+  binding.pry
   winner = check_winner(board)
   computer_picks_square(board)
   draw_board(board)
