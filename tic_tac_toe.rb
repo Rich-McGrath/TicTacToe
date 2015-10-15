@@ -91,7 +91,7 @@ def announce_winner(winner)
 end
 
 def nine_positions_are_filled?(board)
-  empty_positions(board) == []
+  empty_positions(board).empty?
 end
 
 WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
