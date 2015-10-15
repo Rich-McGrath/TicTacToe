@@ -50,7 +50,7 @@ def player_picks_square(board)
     board[position] = 'X'
   else
     puts 'Please pick a square that is not taken'
-    sleep 2.0
+    sleep 3.0
   end
 end
 
@@ -99,8 +99,10 @@ begin
   player_picks_square(board)
   two_in_a_row(board)
   draw_board(board)
-  binding.pry
   winner = check_winner(board)
+  if winner == 'Player'
+    next
+  end
   computer_picks_square(board)
   draw_board(board)
   winner = check_winner(board)
