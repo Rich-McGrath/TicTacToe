@@ -55,14 +55,12 @@ def computer_picks_square(board)
   WINNING_LINES.each do |l|
     defend_this_square = two_in_a_row({l[0] => board[l[0]], l[1] => board[l[1]], l[2] => board[l[2]]} )
     if defend_this_square
-      position = board[defend_this_square]
+      position = defend_this_square
       break
+    end
   end
-end
-
-
-position = empty_positions(board).sample unless defend_this_square
-board[position] = 'O'
+  position = empty_positions(board).sample unless defend_this_square
+  board[position] = 'O'
 end
 
 def check_winner(board)
@@ -77,7 +75,7 @@ MRKR = 'X'
 
 def two_in_a_row(board)
   if board.values.count(MRKR) == 2
-    empty_positions(board)
+    empty_positions(board).first
   else
     false
   end
