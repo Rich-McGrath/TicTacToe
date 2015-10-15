@@ -46,7 +46,12 @@ end
 def player_picks_square(board)
   puts 'Pick a square:(1-9):'
   position = gets.chomp.to_i
-  board[position] = 'X'
+  if board[position] == ' '
+    board[position] = 'X'
+  else
+    puts 'Please pick a square that is not taken'
+    sleep 2.0
+  end
 end
 
 def computer_picks_square(board)
@@ -61,6 +66,7 @@ def computer_picks_square(board)
     end
   end
   position = empty_positions(board).sample unless defend_this_square
+  board[position] = 'O'
 end
 
 def check_winner(board)
