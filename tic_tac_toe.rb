@@ -44,14 +44,11 @@ def empty_positions(board)
 end
 
 def player_picks_square(board)
-  puts 'Pick a square:(1-9):'
-  position = gets.chomp.to_i
-  if board[position] == ' '
-    board[position] = 'X'
-  else
-    puts 'Please pick a square that is not taken'
-    sleep 3.0
-  end
+  begin
+    puts 'Pick a square:(1-9):'
+    position = gets.chomp.to_i
+  end until empty_positions(board).include?(position)
+  board[position] = 'X'
 end
 
 def computer_picks_square(board)
