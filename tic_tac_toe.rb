@@ -73,8 +73,6 @@ def check_winner(board)
   nil
 end
 
-MRKR = 'X'
-
 def two_in_a_row(board)
   return false unless board.values.count('X') == 2
   empty_positions(board).first
