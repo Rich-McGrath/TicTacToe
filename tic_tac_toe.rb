@@ -71,7 +71,7 @@ end
 def check_winner(board)
   WINNING_LINES.each do |line|
     return 'Player' if board.values_at(*line).count('X') == 3
-    return 'Computer' if board.values_at(*line).count('0') == 3
+    return 'Computer' if board.values_at(*line).count('O') == 3
   end
   nil
 end
@@ -101,6 +101,7 @@ draw_board(board)
 begin
   player_picks_square(board)
   two_in_a_row(board)
+  winner = check_winner(board)
   computer_picks_square(board)
   draw_board(board)
   winner = check_winner(board)
