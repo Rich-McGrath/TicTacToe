@@ -56,12 +56,11 @@ end
 
 def computer_picks_square(board)
   defend_this_square = nil
-
+  position = nil
   WINNING_LINES.each do |l|
     defend_this_square = two_in_a_row({l[0] => board[l[0]], l[1] => board[l[1]], l[2] => board[l[2]]} )
     if defend_this_square
       position = defend_this_square
-      board[position] = 'O'
       break
     end
   end
