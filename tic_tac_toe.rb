@@ -79,12 +79,10 @@ end
 MRKR = 'X'
 
 def two_in_a_row(board)
-  if board.values.count(MRKR) == 2
-    empty_positions(board).first
-  else
-    false
-  end
+  return false unless board.values.count(MRK) == 2
+  empty_positions(board).first
 end
+
 
 def announce_winner(winner)
   puts "#{winner} won!"
