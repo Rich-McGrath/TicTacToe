@@ -5,8 +5,6 @@
 # 4. Run code to verify logic
 #
 
-require 'pry'
-
 # Psuedo Code
 # draw a board
 #
